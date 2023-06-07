@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "74107319326",
+    "project_id": "trident-time-tracker",
+    "storage_bucket": "trident-time-tracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74107319326:android:a717128838bd70f075aa0f",
+        "android_client_info": {
+          "package_name": "com.example.st10082074_tridenttimetracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74107319326-j8uhj4h43u7su5nuipesc0f48so7o783.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWZhK-HAqkuZeTOTNjrRUpE80yTbS465c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74107319326-j8uhj4h43u7su5nuipesc0f48so7o783.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
