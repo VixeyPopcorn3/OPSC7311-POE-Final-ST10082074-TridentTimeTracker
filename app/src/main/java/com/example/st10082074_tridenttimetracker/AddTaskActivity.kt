@@ -143,8 +143,13 @@ class AddTaskActivity : AppCompatActivity() {
                     showAddProjectOption()
                 } else {
                     // Project name exists
-                    val projectId = querySnapshot.documents[0].id
-                    saveTaskToFirestore(projectId)
+                    for (document in querySnapshot) {
+
+                        val projectId = document.getString("LoginID").toString()
+                        saveTaskToFirestore(projectId)
+                    }
+                    //val projectId = querySnapshot.documents[0].id
+                    //saveTaskToFirestore(projectId)
                 }
             }
             .addOnFailureListener { exception ->

@@ -13,6 +13,7 @@ class MainPage : AppCompatActivity() {
         private val tasksFragment = TasksFragment()
         private val projectsFragment = ProjectsFragment()
         private val calculationsFragment = CalculationsFragment()
+        private val calendar = CalendarFragment()
         private lateinit var loginId: String // Declare loginId as a lateinit var
         //val loginId = intent.getStringExtra("loginId")
 
@@ -45,6 +46,10 @@ class MainPage : AppCompatActivity() {
                 }
                 R.id.navigation_calculations -> {
                     switchFragment(calculationsFragment)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_calendar -> {
+                    switchFragment(calendar)
                     return@OnNavigationItemSelectedListener true
                 }
             }

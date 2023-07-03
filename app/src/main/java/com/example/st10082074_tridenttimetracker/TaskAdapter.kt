@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,8 +38,31 @@ class TaskAdapter(private val tasks: List<Task>) :
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = tasks[position]
         holder.taskName.text = task.taskName
-        holder.projectName.text = task.projectName
+        holder.projectName.text = task.projectID
         holder.totalHours.text = calculateTotalHours(task)
+
+        val db = Firebase.firestore
+        val projectsCollection = db.collection("Projects")
+        //val projectRef = projectsCollection.document(task.projectID)
+        .whereEqualTo("ProjectID", task.projectID)
+        projectsCollection.get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+
+                    if (!querySnapshot.isEmpty) {
+                        val projectName = document.getString("projectName")
+                        holder.projectName.text = projectName
+                    }else {
+                        holder.projectName.text = "Unknown project"
+                    }
+                }
+                }
+
+            .addOnFailureListener { exception ->
+                // Handle failure to fetch project name
+                holder.projectName.text = "Error loading project name"
+                Log.e("TaskAdapter", "Error fetching project name", exception)
+            }
 
         // Handle add photo button visibility
         if (task.hasPhoto || task.photoUrl != null) {
@@ -70,13 +94,20 @@ class TaskAdapter(private val tasks: List<Task>) :
     }
 
     private fun calculateTotalHours(task: Task): String {
-        val format = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+        //val format = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault())
 
-        val startDate = format.parse("${task.startDate} ${task.startTime}")
-        val endDate = format.parse("${task.startDate} ${task.endTime}")
+        //val startDate = format.parse("${task.startDate} ${task.startTime}")
+        //val endDate = format.parse("${task.startDate} ${task.endTime}")
 
-        val durationMillis = endDate.time - startDate.time
+        val format1 = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+        val startTime = format1.parse("${task.startTime}")
+        val endTime = format1.parse("${task.endTime}")
+        val durationMillis = endTime.time - startTime.time
         val durationHours = durationMillis / (1000 * 60 * 60)
+
+        //val durationMillis = endDate.time - startDate.time
+        //val durationHours = durationMillis / (1000 * 60 * 60)
 
         return "$durationHours hours"
     }
@@ -97,7 +128,7 @@ class TaskAdapter(private val tasks: List<Task>) :
         // Adjust this code based on your Firestore data structure and storage configuration
         val db = Firebase.firestore
         val usersCollection = db.collection("Tasks")
-        val photoRef = usersCollection.document(task.loginId)
+        val photoRef = usersCollection.document(task.loginID)
         val photoUrl = imageUri.toString()
 
         photoRef
