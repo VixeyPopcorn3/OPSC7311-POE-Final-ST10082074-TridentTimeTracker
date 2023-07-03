@@ -22,6 +22,7 @@
             android:layout_alignParentEnd="true"
             android:background="@android:color/transparent"
             android:contentDescription=" "
+            android:fontFamily="@font/archivo_black"
             android:src="@drawable/logout_icon"
             android:text="LogOut" />
 
@@ -32,6 +33,27 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:src="@drawable/trident_icon" />
+
+        <TextView
+            android:id="@+id/GoldStarTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/archivo_black"
+            android:text="0"
+            android:textColor="#FFFFFF" />
+
+        <ImageView
+            android:id="@+id/imageViewGoldStar"
+            android:layout_width="40dp"
+            android:layout_height="33dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            app:srcCompat="@drawable/gold_star" />
     </RelativeLayout>
 
     <!-- Content -->

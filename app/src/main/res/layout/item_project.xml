@@ -10,7 +10,7 @@
         android:id="@+id/projectNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Project Name"
+        android:text="Project Name:"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -18,14 +18,14 @@
         android:id="@+id/clientTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Client Name"
+        android:text="Client Name:"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/totalHoursTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Totral Hours"
+        android:text="Totral Hours:"
         android:textSize="14sp" />
 
 </LinearLayout>

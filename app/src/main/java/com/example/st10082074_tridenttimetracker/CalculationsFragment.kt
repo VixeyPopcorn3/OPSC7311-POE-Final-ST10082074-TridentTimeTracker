@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -19,7 +21,8 @@ import java.util.concurrent.TimeUnit
  */
 class CalculationsFragment : Fragment() {
     private lateinit var loginId: String
-    private lateinit var firestore: FirebaseFirestore
+
+    private var db = Firebase.firestore
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -35,7 +38,7 @@ class CalculationsFragment : Fragment() {
         loginId = bundle?.getString("loginId") ?: ""
 
         // Initialize Firestore
-        firestore = FirebaseFirestore.getInstance()
+        db = FirebaseFirestore.getInstance()
 
         // Calculate total hours for projects
         calculateTotalHoursForProjects()
@@ -45,7 +48,7 @@ class CalculationsFragment : Fragment() {
 
     private fun calculateTotalHoursForProjects() {
         // Query Firestore for projects with the specified loginId
-        firestore.collection("Projects")
+        db.collection("Projects")
             .whereEqualTo("LoginID", loginId)
             .get()
             .addOnSuccessListener { projectsQuerySnapshot ->
@@ -60,7 +63,7 @@ class CalculationsFragment : Fragment() {
 
                     // Query Firestore for tasks linked to the current project
                     if (projectName != null) {
-                        firestore.collection("Tasks")
+                        db.collection("Tasks")
                             .whereEqualTo("LoginID", loginId)
                             .whereEqualTo("ProjectName", projectName)
                             .get()

@@ -5,15 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class MainPage : AppCompatActivity() {
         private val tasksFragment = TasksFragment()
         private val projectsFragment = ProjectsFragment()
         private val calculationsFragment = CalculationsFragment()
+        private val goalsFragment = Goals()
         private val calendar = CalendarFragment()
+        private lateinit var goldStarTextView: TextView
         private lateinit var loginId: String // Declare loginId as a lateinit var
         //val loginId = intent.getStringExtra("loginId")
 
@@ -27,7 +32,10 @@ class MainPage : AppCompatActivity() {
             val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNavigation)
             bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
+            goldStarTextView = findViewById(R.id.GoldStarTextView)
+
             switchFragment(tasksFragment)
+            displayGoldStar(loginId, goldStarTextView)
 
             val logoutButton = findViewById<Button>(R.id.logoutBtn)
             logoutButton.setOnClickListener {
@@ -49,6 +57,10 @@ class MainPage : AppCompatActivity() {
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_calendar -> {
+                    switchFragment(goalsFragment)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_graph -> {
                     switchFragment(calendar)
                     return@OnNavigationItemSelectedListener true
                 }
@@ -65,5 +77,33 @@ class MainPage : AppCompatActivity() {
                 .replace(R.id.contentLayout, fragment)
                 .commit()
         }
+    fun displayGoldStar(loginId: String, textView: TextView) {
+        var db = Firebase.firestore
+        val streakCollection = db.collection("Streak")
 
+        val query = streakCollection.whereEqualTo("LoginID", loginId)
+
+        query.get()
+            .addOnSuccessListener { querySnapshot ->
+                if (!querySnapshot.isEmpty) {
+                    val document = querySnapshot.documents[0]
+                    val goldStar = document.getString("GoldStar") ?: 0
+
+                    textView.text = goldStar.toString()
+                } else {
+                    textView.text = (0).toString()
+                }
+            }
+            .addOnFailureListener { exception ->
+                // Handle any errors that occurred while fetching the data
+                // Display an error message or handle the failure
+            }
     }
+
+
+
+
+
+
+
+}

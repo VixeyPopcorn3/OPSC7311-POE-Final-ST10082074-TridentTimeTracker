@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_tasks"
@@ -14,7 +13,11 @@
         android:icon="@drawable/calendar_icon"
         android:title="@string/menu_calendar" />
     <item
+        android:id="@+id/navigation_graph"
+        android:icon="@drawable/graph_icon"
+        android:title="@string/menu_graph" />
+    <item
         android:id="@+id/navigation_calculations"
         android:title="@string/menu_calculations"
-        android:icon="@drawable/calc_icon" />
+        android:icon="@drawable/calcu_icon" />
 </menu>
