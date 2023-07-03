@@ -10,6 +10,10 @@
         android:title="@string/menu_projects"
         android:icon="@drawable/proj_icon" />
     <item
+        android:id="@+id/navigation_calendar"
+        android:title="@string/menu_calendar"
+        android:icon="@drawable/calendar_icon" />
+    <item
         android:id="@+id/navigation_calculations"
         android:title="@string/menu_calculations"
         android:icon="@drawable/calc_icon" />

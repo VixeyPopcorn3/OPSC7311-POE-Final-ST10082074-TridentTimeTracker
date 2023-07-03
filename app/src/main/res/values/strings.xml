@@ -11,6 +11,7 @@
     <string name="menu_tasks">Tasks</string>
     <string name="menu_projects">Projects</string>
     <string name="menu_calculations">Calculations</string>
+    <string name="menu_calendar">Calendar</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_task_title">Add Task</string>
     <string name="task_name">Task Name</string>

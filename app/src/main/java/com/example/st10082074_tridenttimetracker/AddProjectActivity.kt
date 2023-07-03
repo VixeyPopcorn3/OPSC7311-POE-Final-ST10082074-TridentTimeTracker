@@ -101,7 +101,7 @@ class AddProjectActivity : AppCompatActivity() {
 
         // Create a project object
         val project = hashMapOf(
-            "LoginID" to loginId,
+            "LoginID" to loginId.toLong(),
             "Name" to name,
             "Description" to description,
             "Client" to client,

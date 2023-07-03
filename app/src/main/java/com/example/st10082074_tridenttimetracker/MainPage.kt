@@ -13,8 +13,26 @@ class MainPage : AppCompatActivity() {
         private val tasksFragment = TasksFragment()
         private val projectsFragment = ProjectsFragment()
         private val calculationsFragment = CalculationsFragment()
-        val loginId = intent.getStringExtra("loginId")
+        private lateinit var loginId: String // Declare loginId as a lateinit var
+        //val loginId = intent.getStringExtra("loginId")
 
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_main_page)
+
+            // Retrieve the loginId extra from the intent
+            loginId = intent.getStringExtra("loginId").toString()
+
+            val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNavigation)
+            bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+            switchFragment(tasksFragment)
+
+            val logoutButton = findViewById<Button>(R.id.logoutBtn)
+            logoutButton.setOnClickListener {
+                startActivity(Intent(this@MainPage, MainActivity::class.java))
+            }
+        }
         private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_tasks -> {
@@ -43,18 +61,4 @@ class MainPage : AppCompatActivity() {
                 .commit()
         }
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_main_page)
-
-            val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNavigation)
-            bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-
-            switchFragment(tasksFragment)
-
-            val logoutButton = findViewById<Button>(R.id.logoutBtn)
-            logoutButton.setOnClickListener {
-                startActivity(Intent(this@MainPage, MainActivity::class.java))
-            }
-        }
     }

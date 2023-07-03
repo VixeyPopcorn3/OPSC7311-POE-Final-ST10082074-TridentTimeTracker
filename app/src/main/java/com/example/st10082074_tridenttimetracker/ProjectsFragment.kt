@@ -26,7 +26,7 @@ class ProjectsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_projects, container, false)
-        recyclerView = view.findViewById(R.id.projectsRecyclerView)
+        recyclerView = view.findViewById(R.id.recyclerView)
         projectAdapter = ProjectAdapter(projectsList)
         recyclerView.adapter = projectAdapter
         recyclerView.layoutManager = LinearLayoutManager(context)

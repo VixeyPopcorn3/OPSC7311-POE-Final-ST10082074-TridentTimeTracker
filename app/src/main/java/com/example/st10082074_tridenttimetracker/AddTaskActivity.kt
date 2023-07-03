@@ -135,7 +135,7 @@ class AddTaskActivity : AppCompatActivity() {
         }
         // Check if the project name exists in the Projects collection
         val projectsRef = firestore.collection("Projects")
-        projectsRef.whereEqualTo("ProjectName", projectName)
+        projectsRef.whereEqualTo("Name", projectName)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 if (querySnapshot.isEmpty) {
